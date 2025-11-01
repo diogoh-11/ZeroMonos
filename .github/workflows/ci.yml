@@ -1,39 +1,125 @@
-name: SonarQube
+name: CI/CD with SonarQube
 on:
   push:
     branches:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
-  build:
-    name: Build and analyze
+  test-and-analyze:
+    name: Build, Test and Analyze
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./zeromonos
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Shallow clones should be disabled for better SonarQube analysis
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: 21
           distribution: 'zulu'
+
       - name: Cache SonarQube packages
         uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Build and analyze
+
+      - name: Install Chrome (for Selenium functional tests)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          google-chrome --version
+        working-directory: .
+
+      - name: Compile project
+        run: mvn clean compile -B
+        
+      - name: Run Unit Tests (Repository & Service layer)
+        run: |
+          echo "========================================="
+          echo "Running Unit Tests (DataJpaTest, Service)"
+          echo "========================================="
+          mvn test -Dtest=**/isolationtests/*Test -B
+        continue-on-error: true
+
+      - name: Run Integration Tests (API with MockMvc/RestAssured)
+        run: |
+          echo "========================================="
+          echo "Running Integration Tests (API)"
+          echo "========================================="
+          mvn test -Dtest=RestAssureTest,*ControllerTest -B
+        continue-on-error: true
+
+      - name: Run Functional Tests (BDD with Selenium)
+        run: |
+          echo "========================================="
+          echo "Running Functional Tests (Cucumber + Selenium)"
+          echo "========================================="
+          mvn test -Dtest=RunCucumberTest -B
+        continue-on-error: true
+
+      - name: Display test results summary
+        if: always()
+        run: |
+          echo "========================================="
+          echo "Test Results Summary"
+          echo "========================================="
+          find target/surefire-reports -name "*.txt" -exec echo "File: {}" \; -exec cat {} \; || echo "No test reports found"
+
+      - name: Upload Surefire Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: zeromonos/target/surefire-reports/
+          retention-days: 30
+
+      - name: Upload Cucumber Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-reports
+          path: zeromonos/target/cucumber-reports/
+          retention-days: 30
+
+      - name: Generate Coverage Report
+        run: mvn jacoco:report
+
+      - name: Build and analyze with SonarQube
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=diogoh-11_ZeroMonos
+        run: |
+          mvn -B verify sonar:sonar \
+            -Dsonar.projectKey=diogoh-11_ZeroMonos \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.organization=diogoh-11 \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+
+      - name: Upload Coverage to Codecov (optional)
+        if: success()
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./zeromonos/target/site/jacoco/jacoco.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
