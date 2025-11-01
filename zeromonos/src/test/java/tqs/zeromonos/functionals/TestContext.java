@@ -44,7 +44,7 @@ public class TestContext {
         options.addArguments("--remote-allow-origins=*");
         
         // Descomente para rodar headless (sem interface gráfica)
-        // options.addArguments("--headless=new");
+        options.addArguments("--headless=new");
         
         this.driver = new ChromeDriver(options);
         
