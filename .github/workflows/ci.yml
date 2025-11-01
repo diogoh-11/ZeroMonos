@@ -136,11 +136,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn -B verify sonar:sonar \
+          mvn sonar:sonar \
             -Dsonar.projectKey=diogoh-11_ZeroMonos \
-            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.organization=diogoh-11 \
-            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+            -Dsonar.host.url=https://sonarcloud.io
 
       - name: Upload Coverage to Codecov (optional)
         if: success()
