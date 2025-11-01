@@ -1,0 +1,154 @@
+/* Estilos específicos para o formulário de reserva */
+
+.container {
+  max-width: 700px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+#form-msg {
+  margin-top: 2rem;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+  transition: all 0.2s ease;
+}
+
+.form-group select:hover,
+.form-group input:hover,
+.form-group textarea:hover {
+  border-color: var(--secondary);
+}
+
+/* Estilo melhorado para o input do município com datalist */
+.input-wrapper {
+  position: relative;
+  display: block;
+}
+
+#municipality {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  padding-right: 2.5rem;
+  cursor: text;
+  width: 100%;
+}
+
+#municipality:focus {
+  background-image: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Oculta a seta padrão do datalist no Chrome/Edge */
+#municipality::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Força o datalist a não aparecer */
+#municipality::-webkit-list-button {
+  display: none;
+}
+
+/* Dropdown customizado de sugestões */
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  margin-top: -1px;
+}
+
+.suggestions-dropdown.active {
+  display: block;
+}
+
+.suggestion-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid var(--bg);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+  background-color: var(--bg);
+  color: var(--primary);
+}
+
+.suggestion-item.selected {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.no-suggestions {
+  padding: 0.75rem 1rem;
+  color: #999;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Scroll suave no dropdown */
+.suggestions-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+.suggestions-dropdown::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Ajusta o tamanho da lista do datalist - esconde completamente */
+datalist {
+  display: none !important;
+}
+
+
+
+/* Melhorar aparência do formulário */
+form {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  padding: 2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .form-actions {
+    flex-direction: column;
+  }
+  .form-actions .btn {
+    width: 100%;
+  }
+}

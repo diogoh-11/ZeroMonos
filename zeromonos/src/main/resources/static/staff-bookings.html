@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Painel Staff - Reservas</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/staff-bookings.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚙️ Painel Staff — Gestão de Reservas</h1>
+      <a href="/" class="btn btn-secondary">Voltar</a>
+    </header>
+
+    <section class="filters">
+      <label for="municipality-filter">
+        Filtrar por município:
+        <select id="municipality-filter">
+          <option value="">Carregando...</option>
+        </select>
+      </label>
+      <button id="filter-btn" class="btn btn-primary">🔎 Aplicar Filtro</button>
+    </section>
+
+    <section id="list-section">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Município</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="bookings-tbody">
+          <tr><td colspan="6" style="text-align:center;">Carregando...</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div id="msg"></div>
+  </div>
+
+  <script src="/js/staff-bookings.js"></script>
+</body>
+</html>

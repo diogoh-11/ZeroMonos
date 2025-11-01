@@ -1,0 +1,59 @@
+/* Estilos específicos para visualização de reserva */
+
+.details-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.details-section.hidden {
+  display: none;
+}
+
+.details-content {
+  margin-top: 1rem;
+}
+
+.detail-row {
+  margin-bottom: 1.25rem;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.detail-row span {
+  color: var(--text-light);
+}
+
+.form-section {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.message-container {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .detail-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}

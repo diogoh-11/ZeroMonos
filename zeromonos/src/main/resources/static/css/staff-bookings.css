@@ -1,0 +1,67 @@
+/* Estilos específicos para o painel staff */
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filters label {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 0;
+}
+
+.filters select {
+  margin-top: 0.5rem;
+}
+
+.filters button {
+  margin-top: auto;
+}
+
+#list-section {
+  overflow-x: auto;
+}
+
+.table .status-select {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
+}
+
+.table .btn-update {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.table tbody tr {
+  transition: background 0.2s;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filters label {
+    width: 100%;
+  }
+  
+  .filters button {
+    width: 100%;
+  }
+  
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

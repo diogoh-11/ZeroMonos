@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Nova Reserva - ZeroMonos</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/booking-form.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📝 Nova Reserva</h1>
+      <a href="/" class="btn btn-secondary">Voltar</a>
+    </header>
+    
+    <form id="booking-form">
+      <div class="form-group">
+        <label for="municipality">Município</label>
+        <div class="input-wrapper">
+          <input 
+            type="text" 
+            id="municipality" 
+            name="municipalityName" 
+            placeholder="Digite para procurar..."
+            autocomplete="off"
+            required>
+          <div id="suggestions-dropdown" class="suggestions-dropdown"></div>
+        </div>
+        <small style="color: #666; font-size: 0.875rem;">Comece a digitar para ver sugestões</small>
+      </div>
+
+      <div class="form-group">
+        <label for="requestedDate">Data da Reserva</label>
+        <input type="date" id="requestedDate" name="requestedDate" required>
+      </div>
+
+      <div class="form-group">
+        <label for="timeSlot">Período do Dia</label>
+        <select id="timeSlot" name="timeSlot" required>
+          <option value="MORNING">🌅 Manhã (06:00 - 10:00)</option>
+          <option value="MIDDAY">☀️ Meio-dia (10:00 - 14:00)</option>
+          <option value="EVENING">🌇 Fim de tarde (14:00 - 18:00)</option>
+          <option value="NIGHT">🌙 Noite (18:00 - 22:00)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descrição do Serviço</label>
+        <textarea id="description" name="description" placeholder="Descreva brevemente o motivo da reserva..." required></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">✓ Criar Reserva</button>
+        <a href="/" class="btn btn-secondary">✕ Cancelar</a>
+      </div>
+    </form>
+
+    <div id="form-msg"></div>
+  </div>
+
+  <script src="/js/booking-form.js"></script>
+</body>
+</html>

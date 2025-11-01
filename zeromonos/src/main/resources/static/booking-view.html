@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Consultar Reserva - ZeroMonos</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/booking-view.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔍 Consultar Reserva</h1>
+      <a href="/" class="btn btn-secondary">Voltar</a>
+    </header>
+
+    <div id="search-form" class="form-section">
+      <div class="form-group">
+        <label for="token">Token da Reserva</label>
+        <input type="text" id="token" placeholder="Insira o token da sua reserva">
+      </div>
+      <button id="search-btn" class="btn btn-primary">🔎 Buscar Reserva</button>
+    </div>
+
+    <div id="booking-details" class="details-section hidden">
+      <h2>Detalhes da Reserva</h2>
+      <div class="details-content"></div>
+      <div class="actions">
+        <button id="cancel-btn" class="btn btn-danger">✕ Cancelar Reserva</button>
+      </div>
+    </div>
+
+    <div id="message" class="message-container"></div>
+  </div>
+
+  <script src="/js/booking-view.js"></script>
+</body>
+</html>
