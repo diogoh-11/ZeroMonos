@@ -1,18 +1,17 @@
 # ZeroMonos - Sistema de Gestão de Recolha de Resíduos Volumosos
 
-## 📋 Índice
+## Índice
 
 1. [Visão Geral do Projeto](#visão-geral-do-projeto)
 2. [Arquitetura do Sistema](#arquitetura-do-sistema)
 3. [Funcionalidades Principais](#funcionalidades-principais)
 4. [Modelo de Dados](#modelo-de-dados)
 5. [Abordagem de Testes](#abordagem-de-testes)
-6. [Testes Implementados](#testes-implementados)
-7. [Execução dos Testes](#execução-dos-testes)
+6. [Metricas Sonar](#metricas-sonar)
 
 ---
 
-## 🎯 Visão Geral do Projeto
+## 1-Visão Geral do Projeto
 
 **ZeroMonos** é uma aplicação web para gestão de recolha de resíduos volumosos (monos) desenvolvida com Spring Boot. O sistema permite que cidadãos agendem a recolha de itens grandes (móveis, eletrodomésticos, etc.) e que funcionários municipais gerenciem essas solicitações.
 
@@ -30,7 +29,7 @@
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## 2-Arquitetura do Sistema
 
 ### Estrutura de Camadas
 
@@ -101,7 +100,7 @@
 
 ---
 
-## 🚀 Funcionalidades Principais
+## 3-Funcionalidades Principais
 
 ### 1. **Criação de Reserva (Cidadão)**
 
@@ -152,7 +151,7 @@
 
 ---
 
-## 📊 Modelo de Dados
+## 4-Modelo de Dados
 
 ### Diagrama de Relacionamentos
 
@@ -185,7 +184,7 @@
 
 ---
 
-## 🧪 Abordagem de Testes
+## 5-Abordagem de Testes
 
 ### Pirâmide de Testes Implementada
 
@@ -268,7 +267,32 @@ resources/
 ├── 1-booking.feature             # Feature para fazer uma reserva
 ├── 2-searchReserve.feature       # Feature para procurar por uma reserva
 └── 3-cahngeStateStaff            # Feature para mudar o estado de uma reserva 
+```
+
+---
+
+## 6-Metricas Sonar
 
 
+### **1. Uso de `Stream.toList()` vs `Collectors.toList()`**
+- **Problema**: Uso de API antiga e verbosa
+- **Correção**: Substituí por `Stream.toList()` (Java 16+)
+- **Melhoria**: Código mais conciso e lista imutável por padrão
 
+### **2. Log de dados controlados pelo usuário**
+- **Problema**: Risco de Log Injection e exposição de dados
+- **Correção**: Remover/Sanitizar dados do usuário nos logs
+- **Melhoria**: Segurança reforçada e logs mais limpos
+
+### **3. Tratamento desnecessário de exceções**
+- **Problema**: Catch apenas para log e rethrow da mesma exceção
+- **Correção**: Remover try-catch ou adicionar contexto
+- **Melhoria**: Código mais limpo e exceções mais informativas
+
+### **Impacto no Projeto:**
+
+1. **Segurança**: Prevenção de ataques via logs
+2. **Manutenibilidade**: Código mais limpo e moderno
+3. **Performance**: Redução de overhead desnecessário
+4. **Boas práticas**: Alinhamento com padrões Java modernos
 

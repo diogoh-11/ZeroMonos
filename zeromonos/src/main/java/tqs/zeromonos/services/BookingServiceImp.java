@@ -29,12 +29,8 @@ public class BookingServiceImp implements BookingService {
 
 
     private static final Logger logger = LoggerFactory.getLogger(BookingServiceImp.class);
-    
     private BookingRepository bookingRepository;
-
-
     private MunicipalityRepository municipalityRepository;
-
     private int maxBookingsPerMunicipy;
 
 
@@ -126,7 +122,6 @@ public class BookingServiceImp implements BookingService {
        
         List<Booking> bookings;
         
-        //logger.info("MunicipalityValue", municipalityName);
         // Se município não for especificado, retorna todas as reservas
         if (municipalityName.equalsIgnoreCase("todas")) {
             bookings = bookingRepository.findAll();
@@ -149,7 +144,6 @@ public class BookingServiceImp implements BookingService {
                 .orElseThrow(() -> new NoSuchElementException("Reserva não encontrada"));
         
         // Lógica de mudança de estado e histórico
-
         StateChange stateChange = new StateChange(newStatus, java.time.OffsetDateTime.now());
         booking.addStateChange(stateChange);
         bookingRepository.save(booking);
