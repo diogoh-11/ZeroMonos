@@ -10,7 +10,10 @@ public class BookingRequestDTO {
     private TimeSlot timeSlot;
     private String description;
 
-    public BookingRequestDTO() {}
+    public BookingRequestDTO() {
+        // Construtor vazio necessário para serialização/desserialização pelo Jackson
+        // e frameworks de persistência
+    }
 
     
 

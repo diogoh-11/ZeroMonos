@@ -6,6 +6,7 @@ import tqs.zeromonos.data.TimeSlot;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,7 +23,10 @@ public class BookingResponseDTO {
     private OffsetDateTime updatedAt;
     private List<String> history; // lista simples timestamp + estado
 
-    public BookingResponseDTO() {}
+    public BookingResponseDTO() {
+        // Construtor vazio necessário para serialização/desserialização pelo Jackson
+        // e frameworks de persistência
+    }
 
     public static BookingResponseDTO fromEntity(Booking b) {
         if (b == null) return null;
@@ -46,7 +50,7 @@ public class BookingResponseDTO {
                     String st = sc.getStatus() != null ? sc.getStatus().name() : "UNKNOWN";
                     return ts + " - " + st;
                 })
-                .collect(Collectors.toList()));
+                .collect(Collectors.toCollection(ArrayList::new))); // Explicitly modifiable
         }
 
         return dto;

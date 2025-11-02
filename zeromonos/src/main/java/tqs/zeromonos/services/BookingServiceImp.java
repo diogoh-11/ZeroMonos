@@ -62,12 +62,7 @@ public class BookingServiceImp implements BookingService {
         logger.info("Município encontrado: {}", municipality.getName());
                 
         // Valida a data da reserva
-        try{
-            validateBookingDate(request.getRequestedDate());
-        } catch(IllegalArgumentException e){
-            logger.error("Data de reserva inválida: {}. Motivo: {}", request.getRequestedDate(), e.getMessage());
-            throw e;
-        }
+        validateBookingDate(request.getRequestedDate());
         
 
         // Vê se excedeu o limite maximo de reservas por município
@@ -166,8 +161,6 @@ public class BookingServiceImp implements BookingService {
 
 
     /// Utils
-    /// 
-    /// 
     public void validateBookingDate(LocalDate requestedDate) {
         ZoneId zone = ZoneId.of("Europe/Lisbon"); 
         LocalDate today = LocalDate.now(zone);
