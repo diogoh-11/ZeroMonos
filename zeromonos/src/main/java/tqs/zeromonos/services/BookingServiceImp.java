@@ -49,7 +49,7 @@ public class BookingServiceImp implements BookingService {
     @Override
     public BookingResponseDTO createBooking(BookingRequestDTO request) {
         
-        logger.info("Tentando criar reserva para município: '{}'", request.getMunicipalityName());
+        logger.info("Tentando criar reserva para município");
 
         Municipality municipality = municipalityRepository.findByName(request.getMunicipalityName())
                 .orElseThrow(() -> {
@@ -59,7 +59,7 @@ public class BookingServiceImp implements BookingService {
                            request.getMunicipalityName() + "' não encontrado");
                 });
 
-        logger.info("Município encontrado: {}", municipality.getName());
+        logger.debug("Município encontrado");
                 
         // Valida a data da reserva
         validateBookingDate(request.getRequestedDate());
@@ -72,7 +72,7 @@ public class BookingServiceImp implements BookingService {
         } 
 
         // Reserva valida, prossegue
-        logger.info("Data de reserva validada: {}", request.getRequestedDate());
+        logger.debug("Data de reserva validada");
         Booking booking = new Booking(municipality, request.getDescription(), request.getRequestedDate(), request.getTimeSlot());
         bookingRepository.save(booking);
 
@@ -126,7 +126,7 @@ public class BookingServiceImp implements BookingService {
        
         List<Booking> bookings;
         
-        logger.info("MunicipalityValue", municipalityName);
+        //logger.info("MunicipalityValue", municipalityName);
         // Se município não for especificado, retorna todas as reservas
         if (municipalityName.equalsIgnoreCase("todas")) {
             bookings = bookingRepository.findAll();
