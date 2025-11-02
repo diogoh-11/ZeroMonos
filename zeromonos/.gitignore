@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Node modules para Lighthouse
+node_modules/
+package-lock.json
+
+# Lighthouse reports
+target/lighthouse-reports/
+lighthouse-*.html
