@@ -184,7 +184,7 @@ class BookingServiceTest {
 
         // Simula que já existem 20 reservas (limite máximo = 20)
         List<Booking> existingBookings = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             Booking booking = new Booking();
             booking.setRequestedDate(validDate);
             booking.setTimeSlot(TimeSlot.MORNING);

@@ -38,7 +38,7 @@ public class BookingServiceImp implements BookingService {
     public BookingServiceImp(BookingRepository bookingRepository, MunicipalityRepository municipalityRepository) {
         this.bookingRepository = bookingRepository;
         this.municipalityRepository = municipalityRepository;
-        this.maxBookingsPerMunicipy = 20;
+        this.maxBookingsPerMunicipy = 100;
     }
 
     // Cria uma reserva

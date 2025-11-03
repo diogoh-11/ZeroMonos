@@ -1,0 +1,16 @@
+{
+  "name": "zeromonos-frontend-tests",
+  "version": "1.0.0",
+  "description": "Lighthouse tests for Zeromonos frontend",
+  "type": "module",
+  "scripts": {
+    "lighthouse": "node src/test/lighthouse/lighthouse-test.js"
+  },
+  "keywords": ["lighthouse", "performance", "testing"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lighthouse": "^11.4.0",
+    "chrome-launcher": "^1.1.0"
+  }
+}

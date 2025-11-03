@@ -6,9 +6,9 @@ const errorRate = new Rate('errors');
 
 export const options = {
   stages: [
-    { duration: '5s', target: 100 },   // Ramp-up rápido
-    { duration: '5s', target: 300 },    // Stress máximo
-    { duration: '5s', target: 0 },     // Ramp-down
+    { duration: '10s', target: 100 },   // Ramp-up rápido
+    { duration: '20s', target: 1000 },   // Stress máximo
+    { duration: '10s', target: 0 },     // Ramp-down
   ],
   thresholds: {
     http_req_duration: ['p(95)<2000'],
@@ -48,7 +48,7 @@ export function setup() {
     }
   }
   
-  console.log('Load profile: 100 -> 300 users in 40 seconds');
+  console.log('Load profile: 100 -> 10000 users in 40 seconds');
   
   return { municipalities: municipalities };
 }

@@ -2,12 +2,12 @@
 
 ## Índice
 
-1. [Visão Geral do Projeto](#visão-geral-do-projeto)
-2. [Arquitetura do Sistema](#arquitetura-do-sistema)
-3. [Funcionalidades Principais](#funcionalidades-principais)
-4. [Modelo de Dados](#modelo-de-dados)
-5. [Abordagem de Testes](#abordagem-de-testes)
-6. [Metricas Sonar](#metricas-sonar)
+1. [Visão Geral do Projeto](#1-visão-geral-do-projeto)
+2. [Arquitetura do Sistema](#2-arquitetura-do-sistema)
+3. [Funcionalidades Principais](#3-funcionalidades-principais)
+4. [Modelo de Dados](#4-modelo-de-dados)
+5. [Abordagem de Testes](#5-abordagem-de-testes)
+6. [Metricas Sonar](#6-metricas-sonar)
 
 ---
 
@@ -296,3 +296,171 @@ resources/
 3. **Performance**: Redução de overhead desnecessário
 4. **Boas práticas**: Alinhamento com padrões Java modernos
 
+
+
+
+
+LightHouse Results:
+
+Testing: Homepage
+Results:
+  PASS performance     : 92/100 (min: 70)
+  PASS accessibility   : 100/100 (min: 80)
+  PASS best-practices  : 96/100 (min: 80)
+  PASS seo             : 91/100 (min: 80)
+
+Testing: Booking Form
+Results:
+  PASS performance     : 92/100 (min: 70)
+  PASS accessibility   : 100/100 (min: 80)
+  PASS best-practices  : 96/100 (min: 80)
+  PASS seo             : 91/100 (min: 80)
+
+Testing: Booking View
+Results:
+  PASS performance     : 84/100 (min: 70)
+  PASS accessibility   : 100/100 (min: 80)
+  PASS best-practices  : 96/100 (min: 80)
+  PASS seo             : 91/100 (min: 80)
+
+Testing: Staff Bookings
+Results:
+  PASS performance     : 90/100 (min: 70)
+  PASS accessibility   : 100/100 (min: 80)
+  PASS best-practices  : 96/100 (min: 80)
+  PASS seo             : 91/100 (min: 80)
+
+LIGHTHOUSE TEST SUMMARY
+Pages tested: 4 | Passed: 4 | Failed: 0
+
+
+K6 - Performance Test
+
+THRESHOLDS 
+
+    errors
+    ✓ 'rate<0.1' rate=0.00%
+
+    http_req_duration
+    ✓ 'p(95)<500' p(95)=13.03ms
+
+    http_req_failed
+    ✓ 'rate<0.1' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 10148   65.760383/s
+    checks_succeeded...: 100.00% 10148 out of 10148
+    checks_failed......: 0.00%   0 out of 10148
+
+    ✓ municipalities status 200
+    ✓ municipalities response time OK
+    ✓ create booking status 200
+    ✓ create booking response time OK
+    ✓ create booking returns token
+    ✓ get booking status 200
+    ✓ get booking response time OK
+    ✓ get booking correct data
+    ✓ cancel booking successful
+    ✓ cancel booking response time OK
+
+    CUSTOM
+    errors.........................: 0.00%  0 out of 0
+
+    HTTP
+    http_req_duration..............: avg=6.84ms min=1.01ms med=6.54ms max=150.18ms p(90)=10.5ms p(95)=13.03ms
+      { expected_response:true }...: avg=6.84ms min=1.01ms med=6.54ms max=150.18ms p(90)=10.5ms p(95)=13.03ms
+    http_req_failed................: 0.00%  0 out of 3897
+    http_reqs......................: 3897   25.253076/s
+
+    EXECUTION
+    iteration_duration.............: avg=5.02s  min=5.01s  med=5.02s  max=5.2s     p(90)=5.03s  p(95)=5.04s  
+    iterations.....................: 1178   7.633596/s
+    vus............................: 1      min=1         max=100
+    vus_max........................: 100    min=100       max=100
+
+    NETWORK
+    data_received..................: 6.5 MB 42 kB/s
+    data_sent......................: 623 kB 4.0 kB/s
+
+
+K6 - Spike-test
+
+  █ THRESHOLDS 
+
+    http_req_duration
+    ✓ 'p(99)<2000' p(99)=59.84ms
+
+    http_req_failed
+    ✓ 'rate<0.2' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 32214   458.3397/s
+    checks_succeeded...: 100.00% 32214 out of 32214
+    checks_failed......: 0.00%   0 out of 32214
+
+    ✓ status 200
+    ✓ response time acceptable
+
+    HTTP
+    http_req_duration..............: avg=11.06ms min=1.49ms  med=8.33ms   max=201.32ms p(90)=20.27ms p(95)=30.37ms 
+      { expected_response:true }...: avg=11.06ms min=1.49ms  med=8.33ms   max=201.32ms p(90)=20.27ms p(95)=30.37ms 
+    http_req_failed................: 0.00%  0 out of 16107
+    http_reqs......................: 16107  229.16985/s
+
+    EXECUTION
+    iteration_duration.............: avg=512.4ms min=501.7ms med=509.63ms max=702.18ms p(90)=522.4ms p(95)=532.47ms
+    iterations.....................: 16107  229.16985/s
+    vus............................: 1      min=1          max=200
+    vus_max........................: 200    min=200        max=200
+
+    NETWORK
+    data_received..................: 72 MB  1.0 MB/s
+    data_sent......................: 1.6 MB 22 kB/s
+
+
+K6 - Stress-Test
+
+
+█ THRESHOLDS 
+
+    errors
+    ✓ 'rate<0.3' rate=0.00%
+
+    http_req_duration
+    ✓ 'p(95)<2000' p(95)=1.59s
+
+    http_req_failed
+    ✓ 'rate<0.3' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 15711   440.402547/s
+    checks_succeeded...: 100.00% 15711 out of 15711
+    checks_failed......: 0.00%   0 out of 15711
+
+    ✓ municipalities OK
+    ✓ booking created
+
+    CUSTOM
+    errors.........................: 0.00%  0 out of 0
+
+    HTTP
+    http_req_duration..............: avg=430.71ms min=2.14ms   med=215.79ms max=2.2s  p(90)=1.12s p(95)=1.59s
+      { expected_response:true }...: avg=430.71ms min=2.14ms   med=215.79ms max=2.2s  p(90)=1.12s p(95)=1.59s
+    http_req_failed................: 0.00%  0 out of 15712
+    http_reqs......................: 15712  440.430578/s
+
+    EXECUTION
+    iteration_duration.............: avg=933.29ms min=502.73ms med=718.14ms max=2.71s p(90)=1.62s p(95)=2.09s
+    iterations.....................: 15711  440.402547/s
+    vus............................: 122    min=6          max=991 
+    vus_max........................: 1000   min=1000       max=1000
+
+    NETWORK
+    data_received..................: 27 MB  755 kB/s
+    data_sent......................: 3.2 MB 89 kB/s
