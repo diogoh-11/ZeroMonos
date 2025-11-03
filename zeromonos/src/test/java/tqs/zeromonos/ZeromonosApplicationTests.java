@@ -12,4 +12,10 @@ class ZeromonosApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+    void mainMethodRuns() {
+        // Testa o método main diretamente para cobertura completa
+        ZeromonosApplication.main(new String[] {});
+    }
+
 }
