@@ -32,6 +32,7 @@ public class BookingServiceImp implements BookingService {
     private BookingRepository bookingRepository;
     private MunicipalityRepository municipalityRepository;
     private int maxBookingsPerMunicipy;
+    private static final String RESERVA_N_ENCONTRADA= "Reserva não encontrada";
 
 
 
@@ -80,7 +81,7 @@ public class BookingServiceImp implements BookingService {
     @Override
     public BookingResponseDTO getBookingByToken(String token) {
         Booking booking = bookingRepository.findByToken(token)
-                .orElseThrow(() -> new NoSuchElementException("Reserva não encontrada"));
+                .orElseThrow(() -> new NoSuchElementException(RESERVA_N_ENCONTRADA));
         return BookingResponseDTO.fromEntity(booking);
     }
 
@@ -89,7 +90,7 @@ public class BookingServiceImp implements BookingService {
     @Override
     public void cancelBooking(String token) {
         Booking booking = bookingRepository.findByToken(token)
-                .orElseThrow(() -> new NoSuchElementException("Reserva não encontrada"));
+                .orElseThrow(() -> new NoSuchElementException(RESERVA_N_ENCONTRADA));
 
 
         // Avança com a reserva se estiver em estado RECEIVED ou ASSIGNED
@@ -141,7 +142,7 @@ public class BookingServiceImp implements BookingService {
     @Override
     public BookingResponseDTO updateBookingStatusForStaff(String token, BookingStatus newStatus) {
         Booking booking = bookingRepository.findByToken(token)
-                .orElseThrow(() -> new NoSuchElementException("Reserva não encontrada"));
+                .orElseThrow(() -> new NoSuchElementException(RESERVA_N_ENCONTRADA));
         
         // Lógica de mudança de estado e histórico
         StateChange stateChange = new StateChange(newStatus, java.time.OffsetDateTime.now());
