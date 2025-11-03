@@ -201,7 +201,7 @@ jobs:
         working-directory: .
 
       - name: Install Lighthouse dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build application
         run: mvn -B clean package -DskipTests
