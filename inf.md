@@ -10,7 +10,7 @@
 | `PUT` | `/api/bookings/{token}/cancel` | Cancelar reserva |
 | `GET` | `/api/bookings/municipalities` | Listar municípios |
 | `GET` | `/api/staff/bookings`          | Listar todas reservas (staff) |
-| `PUT` | `/api/staff/bookings/{token}/status` | Atualizar estado (staff) |
+| `PATCH` | `/api/staff/bookings/{token}/status` | Atualizar estado (staff) |
 
 
 
@@ -61,7 +61,7 @@ public void addStatusHistory(BookingStatus status, String notes) {
 @GetMapping("/api/staff/bookings")
 public ResponseEntity<List<BookingResponse>> getAllBookings()
 
-@PutMapping("/api/staff/bookings/{token}/status")
+@PatchMapping("/api/staff/bookings/{token}/status")
 public ResponseEntity<BookingResponse> updateBookingStatus()
 ```
 

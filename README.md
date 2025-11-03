@@ -289,6 +289,12 @@ resources/
 - **Correção**: Remover try-catch ou adicionar contexto
 - **Melhoria**: Código mais limpo e exceções mais informativas
 
+
+### **4. Melhorias de Coverage**
+- **Correção**: Adicionados testes específicos para aumentar cobertura de código e cenários críticos
+
+
+
 ### **Impacto no Projeto:**
 
 1. **Segurança**: Prevenção de ataques via logs

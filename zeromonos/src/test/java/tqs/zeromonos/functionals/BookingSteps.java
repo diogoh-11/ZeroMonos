@@ -22,9 +22,6 @@ public class BookingSteps {
         this.wait = new WebDriverWait(context.getDriver(), Duration.ofSeconds(10));
     }
 
-    // REMOVIDO: @Given("I open the application home page") - agora está em CommonSteps
-    // REMOVIDO: @When("I click the {string} button") - agora está em CommonSteps
-
     @Then("the booking form page should be displayed")
     public void bookingFormDisplayed() {
         wait.until(ExpectedConditions.urlContains("booking-form.html"));
